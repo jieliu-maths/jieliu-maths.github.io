@@ -7,33 +7,50 @@ nav: true
 nav_order: 1
 ---
 
-My research lies in the analysis of nonlinear partial differential equations, especially fluid equations and nonlinear wave equations.
-I study how solutions form singularities, how singular behavior persists under perturbations, and how solutions evolve over long times.
+My research concerns **singularity formation and long-time dynamics in nonlinear partial differential equations**,
+with contributions to fluid mechanics and nonlinear wave equations.
+A common theme is **dynamical selection**: which singular or coherent regimes emerge under nonlinear evolution, and why do they persist under perturbations?
+I develop energy, spectral, semigroup, and modulation methods to describe the rates, profiles, and stability of these regimes.
 
-## Singularity formation and stability
+## Structure and stability in fluid equations
 
-I investigate self-similar blow-up and its stability for nonlinear wave equations, including equations with derivative nonlinearities.
-My work includes stability of self-similar solutions for superconformal semilinear wave equations and blow-up for wave equations
-with quadratic spatial or time-derivative nonlinearities.
+My work on the De Gregorio modification of the Constantin–Lax–Majda model studies the interplay between convection and vortex stretching.
+With Zhen Lei and Xiao Ren, I proved global well-posedness for sign-definite vorticity without a smallness assumption, using a new conservation law.
+We also established exponential stability near the ground-state family and removed a mean-zero restriction through an adapted energy space.
+This work illustrates how the choice of function space and energy structure can reveal stability hidden in the original equation.
 
-Related papers: [superconformal semilinear waves]({{ '/publications/#liu2026superconformal' | relative_url }}),
-[quadratic spatial derivatives]({{ '/publications/#ghoul2025spatial' | relative_url }}), and
-[quadratic time derivatives]({{ '/publications/#liu2025time' | relative_url }}).
+With Ke Chen, I constructed finite-energy weak solutions of three-dimensional hypoviscous incompressible elastodynamics using convex integration.
+Together, these results address both nonlinear stability and the flexibility of weak solutions in fluid-related systems.
 
-## Long-time dynamics and energy transfer
+Related papers: [vorticity dynamics and stability]({{ '/publications/#lei2020clm' | relative_url }}) and
+[weak solutions of hypoviscous elastodynamics]({{ '/publications/#chen2022elastodynamics' | relative_url }}).
 
-I study resonances, energy transfer, and radiation damping in Hamiltonian nonlinear Klein–Gordon equations,
-as well as scattering for quasilinear wave equations satisfying null conditions.
-An important theme is the interaction between discrete and continuous spectral modes and the role of Fermi's golden rule.
+## Singularity formation and asymptotic stability
 
-Related papers: [weak resonance]({{ '/publications/#lei2026weak' | relative_url }}),
+I study which blow-up profiles and rates are selected by nonlinear evolution and whether they remain stable under perturbations.
+In joint work with Tej-eddine Ghoul and Nader Masmoudi on a wave equation with quadratic spatial-derivative nonlinearity,
+we ruled out smooth exact self-similar blow-up profiles, constructed generalized self-similar solutions with logarithmic growth,
+and proved their asymptotic stability.
+The analysis combines spectral and semigroup estimates for non-self-adjoint operators with modulation and nonlinear energy bounds.
+
+In my solo work on superconformal semilinear wave equations, I used Lorentz transformations in similarity variables to establish
+spectral equivalence across a family of blow-up profiles and prove nonlinear asymptotic stability.
+Joint work with Faiq Raees extends the generalized self-similar analysis to models with quadratic time-derivative nonlinearities.
+
+Related papers: [generalized self-similar blow-up]({{ '/publications/#ghoul2025spatial' | relative_url }}),
+[Lorentz symmetry and stability]({{ '/publications/#liu2026superconformal' | relative_url }}), and
+[time-derivative models]({{ '/publications/#liu2025time' | relative_url }}).
+
+## Energy transfer, radiation, and scattering
+
+With Zhen Lei and Zhaojie Yang, I studied how nonlinear resonance transfers energy from localized internal modes to radiation
+in Hamiltonian nonlinear Klein–Gordon equations with a potential.
+Our work derives sharp damping laws in the weak-resonance regime and treats interactions among multiple, possibly degenerate internal modes.
+The analysis brings together generalized Fermi golden rules, normal-form transformations, cancellation structures, and dispersive estimates.
+These results connect metastability and radiation damping with the broader question of dynamical selection.
+
+Earlier joint work with Daoyin He and Keyan Wang established a precise scattering profile for two-dimensional quasilinear wave equations satisfying null conditions.
+
+Related papers: [weak resonance and damping]({{ '/publications/#lei2026weak' | relative_url }}),
 [multiple internal modes]({{ '/publications/#lei2026resonances' | relative_url }}), and
 [two-dimensional scattering]({{ '/publications/#he2020scattering' | relative_url }}).
-
-## Fluid models and weak solutions
-
-My work on fluid-related equations includes the Constantin–Lax–Majda model with convection and weak solutions of
-three-dimensional hypoviscous elastodynamics. These problems concern regularity, stability, and nonuniqueness in nonlinear evolution equations.
-
-Related papers: [the Constantin–Lax–Majda model]({{ '/publications/#lei2020clm' | relative_url }}) and
-[hypoviscous elastodynamics]({{ '/publications/#chen2022elastodynamics' | relative_url }}).
