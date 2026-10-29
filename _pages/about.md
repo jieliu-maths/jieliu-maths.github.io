@@ -16,6 +16,8 @@ latest_posts:
 ---
 
 I am a Postdoctoral Associate in Mathematics at New York University Abu Dhabi, where I have been since 2023.
+My postdoctoral mentors are [Tej-eddine Ghoul](https://nyuad.nyu.edu/en/academics/divisions/science/faculty/tej-eddine-ghoul.html)
+and [Nader Masmoudi](https://math.nyu.edu/~masmoudi/).
 My research concerns **singularity formation and long-time dynamics in fluid and dispersive equations**.
 
 I received my Ph.D. in Applied Mathematics from the Shanghai Center for Mathematical Sciences at Fudan University in June 2023,
