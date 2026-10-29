@@ -7,32 +7,38 @@ nav: true
 nav_order: 1
 ---
 
-My research interests lie in **singularity formation and long-time dynamics in fluid and dispersive equations**.
-I am interested in how nonlinear evolution produces singular or coherent structures, which mechanisms determine their stability,
-and how transport, dissipation, and radiation influence these dynamics.
+My research concerns **singularity formation and long-time dynamics in fluid and dispersive equations**.
+I study how transport, nonlinear focusing, resonance, and radiation shape the evolution of solutions,
+and how these mechanisms select singular or coherent structures that persist under perturbations.
 
-## Boundary layers and incompressible fluids
+## Boundary layer separation and turbulence
 
-Boundary layers are thin regions near solid boundaries where viscosity and rapid variations in velocity play an essential role.
-Their stability and separation are closely connected to vorticity amplification, the creation of small scales, and the interaction between viscous and inviscid flow.
-These questions form part of the broader study of regularity and stability in incompressible fluid dynamics.
+Boundary-layer separation and the generation of fine scales are important mechanisms in fluid motion.
+My interests include the dynamics of unsteady separation, the amplification and transport of vorticity,
+and their connections with turbulent motion and the interaction between viscous and inviscid flow.
+
+## Vorticity dynamics and fluid stability
+
+The competition between transport, stretching, and dissipation governs the evolution of vorticity and the stability of fluid structures.
+My work on vorticity models examines how nonlinear structure and energy balance control these dynamics.
+Related work on hypoviscous elastodynamics explores the behavior and flexibility of finite-energy weak solutions in coupled fluid systems.
 
 ## Compressible focusing and collapse
 
-Compressible flows can concentrate density and develop large velocity gradients through nonlinear focusing.
-Collapse problems ask how this concentration occurs, which rates and profiles describe it, and whether the resulting regimes persist under perturbations.
-The interplay of compression, pressure, and attractive forces provides a setting for understanding singular behavior in fluid equations.
+Compression and attractive forces can concentrate mass and produce large velocity gradients in compressible flow.
+I am interested in the mechanisms that select collapse profiles and rates, the competition between pressure and focusing,
+and the stability of these regimes under perturbations.
 
-## Singularity formation and stability
+## Self-similar blow-up in nonlinear waves
 
-Finite-time singularities describe the breakdown of regularity in nonlinear evolution.
-Self-similar and generalized self-similar descriptions reveal the scales and profiles of this behavior.
-Stability and dynamical selection distinguish robust singular regimes from exceptional solutions and clarify how the dynamics respond to changes in initial data.
+Nonlinear focusing can lead to finite-time blow-up, with self-similar or generalized self-similar profiles describing the emerging scales.
+My work on nonlinear wave equations studies these blow-up regimes and their asymptotic stability,
+including the influence of symmetry and derivative nonlinearities on the singular dynamics.
 
-## Energy transfer and long-time dynamics
+## Resonance, radiation, and energy transfer
 
-Resonance, dispersion, and radiation govern the evolution of solutions over long times.
-The exchange of energy between localized coherent modes and radiative components can produce metastability, damping, or scattering.
-Understanding these interactions connects the persistence of nonlinear structures with their eventual decay or reorganization.
+Nonlinear resonance allows localized coherent modes to exchange energy with radiation, producing damping and metastable behavior.
+My work on Hamiltonian Klein–Gordon equations examines these interactions and the resulting long-time dynamics.
+Related work on wave scattering studies how nonlinear solutions approach freely propagating waves.
 
 See [Publications]({{ '/publications/' | relative_url }}) for papers.
