@@ -19,3 +19,6 @@ vendor
 # Python bytecode from bin/ helper scripts
 __pycache__/
 *.pyc
+
+# The source CV is private and is never part of this website.
+*[Cc][Vv].pdf

@@ -1,15 +1,18 @@
 ---
 layout: page
+title: Teaching
 permalink: /teaching/
-title: teaching
-description: Course materials, schedules, and resources for classes taught.
+description: Teaching assistant experience at Fudan University.
 nav: true
-nav_order: 6
-calendar: true
+nav_order: 4
 ---
 
-This page displays a collection of courses with detailed schedules, materials, and resources. You can organize your courses by years, terms, or topics.
+I served as a **Teaching Assistant at Fudan University** for the following courses.
 
-{% include calendar.liquid calendar_id='test@gmail.com' timezone='Asia/Shanghai' %}
-
-{% include courses.liquid %}
+| Term        | Course                            |
+| ----------- | --------------------------------- |
+| Fall 2021   | Equations of Mathematical Physics |
+| Spring 2020 | Mathematical Analysis II          |
+| Fall 2019   | Ordinary Differential Equations   |
+| Spring 2019 | Equations of Mathematical Physics |
+| Fall 2018   | Abstract Algebra                  |

@@ -1,34 +1,26 @@
 ---
 layout: about
-title: about
+title: About
 permalink: /
-subtitle: <a href='#'>Affiliations</a>. Address. Contacts. Motto. Etc.
-
-profile:
-  align: right
-  image: prof_pic.jpg
-  image_circular: false # crops the image to make it circular
-  more_info: >
-    <p>555 your office number</p>
-    <p>123 your address street</p>
-    <p>Your City, State 12345</p>
-
-selected_papers: true # includes a list of papers marked as "selected={true}"
-social: true # includes social icons at the bottom of the page
-
+subtitle: Postdoctoral Associate · New York University Abu Dhabi
+profile: false
+selected_papers: false
+social: false
 announcements:
-  enabled: true # includes a list of news items
-  scrollable: true # adds a vertical scroll bar if there are more than 3 news items
-  limit: 5 # leave blank to include all the news in the `_news` folder
-
+  enabled: false
 latest_posts:
-  enabled: true
-  scrollable: true # adds a vertical scroll bar if there are more than 3 new posts items
-  limit: 3 # leave blank to include all the blog posts
+  enabled: false
 ---
 
-Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](https://www.reddit.com). You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
+I am a Postdoctoral Associate in Mathematics at New York University Abu Dhabi, where I have been since 2023.
+My research concerns **singularity formation and long-time dynamics in fluid and dispersive equations**.
 
-Put your address / P.O. box / other info right below your picture. You can also disable any of these elements by editing `profile` property of the YAML header of your `_pages/about.md`. Edit `_bibliography/papers.bib` and Jekyll will render your [publications page](/al-folio/publications/) automatically.
+I received my Ph.D. in Applied Mathematics from the Shanghai Center for Mathematical Sciences at Fudan University in June 2023,
+under the supervision of [Zhen Lei](https://faculty.fudan.edu.cn/leizhen/).
+Previously, I obtained my B.S. in Mathematics from Fudan University in 2018.
 
-Link to your social media connections, too. This theme is set up to use [Font Awesome icons](https://fontawesome.com/) and [Academicons](https://jpswalsh.github.io/academicons/), like the ones below. Add your Facebook, Twitter, LinkedIn, Google Scholar, or just disable all of them.
+**Email:** [jl15817@nyu.edu](mailto:jl15817@nyu.edu)
+
+Read about my [research interests]({{ '/research/' | relative_url }}), browse my
+[publications and preprints]({{ '/publications/' | relative_url }}), or see my
+[talks]({{ '/talks/' | relative_url }}) and [teaching experience]({{ '/teaching/' | relative_url }}).
