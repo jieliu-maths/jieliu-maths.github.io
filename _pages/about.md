@@ -3,7 +3,10 @@ layout: about
 title: About
 permalink: /
 subtitle: Postdoctoral Associate · New York University Abu Dhabi
-profile: false
+profile:
+  align: right
+  image: jie-liu.jpg
+  image_circular: false
 selected_papers: false
 social: false
 announcements:

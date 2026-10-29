@@ -20,12 +20,13 @@ Do not add the CV PDF to this repository or link to it from public pages. CV fil
 
 ## Add a profile photo
 
-The homepage currently uses a text-only layout. To add an original photo:
+The homepage displays `assets/img/jie-liu.jpg` on the right. The supplied original photo is preserved without cropping or retouching.
+To replace the photo:
 
 1. Copy your original JPG or PNG into `assets/img/`, for example `assets/img/jie-liu.jpg`.
    Use a filename without spaces. A portrait at least 800 pixels wide is sufficient; keep the original elsewhere as a backup.
    Export HEIC photos to JPG or PNG first.
-2. In `_pages/about.md`, replace `profile: false` with:
+2. In `_pages/about.md`, keep the following profile settings, updating `image` if the filename changes:
 
    ```yaml
    profile:

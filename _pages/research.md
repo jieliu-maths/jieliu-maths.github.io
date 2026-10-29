@@ -7,50 +7,32 @@ nav: true
 nav_order: 1
 ---
 
-My research concerns **singularity formation and long-time dynamics in nonlinear partial differential equations**,
-with contributions to fluid mechanics and nonlinear wave equations.
-A common theme is **dynamical selection**: which singular or coherent regimes emerge under nonlinear evolution, and why do they persist under perturbations?
-I develop energy, spectral, semigroup, and modulation methods to describe the rates, profiles, and stability of these regimes.
+My research interests lie in **singularity formation and long-time dynamics in fluid and dispersive equations**.
+I am interested in how nonlinear evolution produces singular or coherent structures, which mechanisms determine their stability,
+and how transport, dissipation, and radiation influence these dynamics.
 
-## Structure and stability in fluid equations
+## Boundary layers and incompressible fluids
 
-My work on the De Gregorio modification of the Constantin–Lax–Majda model studies the interplay between convection and vortex stretching.
-With Zhen Lei and Xiao Ren, I proved global well-posedness for sign-definite vorticity without a smallness assumption, using a new conservation law.
-We also established exponential stability near the ground-state family and removed a mean-zero restriction through an adapted energy space.
-This work illustrates how the choice of function space and energy structure can reveal stability hidden in the original equation.
+Boundary layers are thin regions near solid boundaries where viscosity and rapid variations in velocity play an essential role.
+Their stability and separation are closely connected to vorticity amplification, the creation of small scales, and the interaction between viscous and inviscid flow.
+These questions form part of the broader study of regularity and stability in incompressible fluid dynamics.
 
-With Ke Chen, I constructed finite-energy weak solutions of three-dimensional hypoviscous incompressible elastodynamics using convex integration.
-Together, these results address both nonlinear stability and the flexibility of weak solutions in fluid-related systems.
+## Compressible focusing and collapse
 
-Related papers: [vorticity dynamics and stability]({{ '/publications/#lei2020clm' | relative_url }}) and
-[weak solutions of hypoviscous elastodynamics]({{ '/publications/#chen2022elastodynamics' | relative_url }}).
+Compressible flows can concentrate density and develop large velocity gradients through nonlinear focusing.
+Collapse problems ask how this concentration occurs, which rates and profiles describe it, and whether the resulting regimes persist under perturbations.
+The interplay of compression, pressure, and attractive forces provides a setting for understanding singular behavior in fluid equations.
 
-## Singularity formation and asymptotic stability
+## Singularity formation and stability
 
-I study which blow-up profiles and rates are selected by nonlinear evolution and whether they remain stable under perturbations.
-In joint work with Tej-eddine Ghoul and Nader Masmoudi on a wave equation with quadratic spatial-derivative nonlinearity,
-we ruled out smooth exact self-similar blow-up profiles, constructed generalized self-similar solutions with logarithmic growth,
-and proved their asymptotic stability.
-The analysis combines spectral and semigroup estimates for non-self-adjoint operators with modulation and nonlinear energy bounds.
+Finite-time singularities describe the breakdown of regularity in nonlinear evolution.
+Self-similar and generalized self-similar descriptions reveal the scales and profiles of this behavior.
+Stability and dynamical selection distinguish robust singular regimes from exceptional solutions and clarify how the dynamics respond to changes in initial data.
 
-In my solo work on superconformal semilinear wave equations, I used Lorentz transformations in similarity variables to establish
-spectral equivalence across a family of blow-up profiles and prove nonlinear asymptotic stability.
-Joint work with Faiq Raees extends the generalized self-similar analysis to models with quadratic time-derivative nonlinearities.
+## Energy transfer and long-time dynamics
 
-Related papers: [generalized self-similar blow-up]({{ '/publications/#ghoul2025spatial' | relative_url }}),
-[Lorentz symmetry and stability]({{ '/publications/#liu2026superconformal' | relative_url }}), and
-[time-derivative models]({{ '/publications/#liu2025time' | relative_url }}).
+Resonance, dispersion, and radiation govern the evolution of solutions over long times.
+The exchange of energy between localized coherent modes and radiative components can produce metastability, damping, or scattering.
+Understanding these interactions connects the persistence of nonlinear structures with their eventual decay or reorganization.
 
-## Energy transfer, radiation, and scattering
-
-With Zhen Lei and Zhaojie Yang, I studied how nonlinear resonance transfers energy from localized internal modes to radiation
-in Hamiltonian nonlinear Klein–Gordon equations with a potential.
-Our work derives sharp damping laws in the weak-resonance regime and treats interactions among multiple, possibly degenerate internal modes.
-The analysis brings together generalized Fermi golden rules, normal-form transformations, cancellation structures, and dispersive estimates.
-These results connect metastability and radiation damping with the broader question of dynamical selection.
-
-Earlier joint work with Daoyin He and Keyan Wang established a precise scattering profile for two-dimensional quasilinear wave equations satisfying null conditions.
-
-Related papers: [weak resonance and damping]({{ '/publications/#lei2026weak' | relative_url }}),
-[multiple internal modes]({{ '/publications/#lei2026resonances' | relative_url }}), and
-[two-dimensional scattering]({{ '/publications/#he2020scattering' | relative_url }}).
+See [Publications]({{ '/publications/' | relative_url }}) for papers.
