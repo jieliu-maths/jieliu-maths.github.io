@@ -95,6 +95,7 @@ python3 examples/ai4math/verify.py \
   <section class="wf-section wf-last" aria-labelledby="scope-heading">
     <h2 id="scope-heading">Scope and current limits</h2>
     <p class="wf-scope">The supported core is mathematical research. An <a href="https://github.com/jieliu-maths/AI-Research-Workflow/tree/main/profiles/ai4s">experimental AI4S profile</a> adds data provenance, controls, frozen evaluation, and reproducibility. The project does not include a foundation model, an automatic theorem prover, or a complete autonomous scientist. Workflow consistency checks do not certify mathematical truth, and comparative productivity gains have not yet been established.</p>
+    <p class="wf-scope">For a selected manuscript, <a href="{{ '/math-paper-editor/' | relative_url }}">Math Paper Editor</a> adds scoped review and traceable revision. Its usage demonstration shows what a language edit may change.</p>
     <p class="wf-scope"><a href="https://github.com/jieliu-maths/AI-Research-Workflow/blob/main/docs/landscape-review.en.md">Related systems &amp; design comparison ↗</a> · <a href="https://github.com/jieliu-maths/AI-Research-Workflow/blob/main/ROADMAP.md">Development roadmap ↗</a></p>
   </section>
 </div>

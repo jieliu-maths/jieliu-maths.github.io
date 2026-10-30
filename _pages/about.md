@@ -42,3 +42,10 @@ Read about my [research interests]({{ '/research/' | relative_url }}), browse my
   <p class="workflow-description">I am developing an open workflow for AI-assisted mathematical research, with explicit proof obligations, independent review, and human-approved results.</p>
   <p class="workflow-links"><a href="{{ '/ai-research-workflow/' | relative_url }}">Project &amp; interactive demonstration →</a><a href="https://github.com/jieliu-maths/AI-Research-Workflow">GitHub ↗</a></p>
 </section>
+
+<section class="workflow-entry" aria-labelledby="editor-entry-heading">
+  <p class="workflow-label">Open research tool · Mathematical manuscripts</p>
+  <h2 id="editor-entry-heading">Math Paper Editor</h2>
+  <p class="workflow-description">A skill for scoped mathematical review and traceable LaTeX revision, with separate mathematical findings, conservative edits, and author-controlled proof restructuring.</p>
+  <p class="workflow-links"><a href="{{ '/math-paper-editor/' | relative_url }}">Project &amp; usage demonstration →</a><a href="https://github.com/jieliu-maths/math-paper-editor">GitHub ↗</a></p>
+</section>

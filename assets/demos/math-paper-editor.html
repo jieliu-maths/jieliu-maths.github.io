@@ -1,0 +1,678 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>Math Paper Editor — interactive usage example</title>
+    <style>
+      :root {
+        --accent: #79518c;
+        --ink: #25232a;
+        --muted: #6e6974;
+        --line: #e6e1e9;
+        --soft: #f8f6fa;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: #fff;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: 14px;
+        line-height: 1.65;
+      }
+      #app {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 28px;
+      }
+      .top {
+        display: flex;
+        align-items: start;
+        justify-content: space-between;
+        gap: 18px;
+      }
+      .eyebrow {
+        color: var(--accent);
+        font-size: 10px;
+        font-weight: 650;
+        letter-spacing: 0.16em;
+        margin: 0 0 9px;
+      }
+      h1 {
+        font:
+          400 clamp(23px, 3.8vw, 31px)/1.3 Georgia,
+          "Songti SC",
+          serif;
+        letter-spacing: -0.025em;
+        margin: 0 0 10px;
+      }
+      .intro {
+        color: var(--muted);
+        font-size: 12px;
+        max-width: 80ch;
+        margin: 0 0 22px;
+      }
+      button {
+        font: inherit;
+        cursor: pointer;
+        color: var(--ink);
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        background: #fff;
+        padding: 7px 12px;
+      }
+      button:hover {
+        border-color: var(--accent);
+      }
+      button:focus-visible,
+      input:focus-visible {
+        outline: 3px solid #b69bc6;
+        outline-offset: 3px;
+      }
+      button:disabled {
+        cursor: default;
+        opacity: 0.55;
+      }
+      #language {
+        font-size: 12px;
+        white-space: nowrap;
+      }
+      .modes {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 0;
+        border-bottom: 1px solid var(--line);
+        margin-bottom: 20px;
+      }
+      .modes button {
+        border: 0;
+        border-bottom: 2px solid transparent;
+        border-radius: 0;
+        padding: 10px 8px 13px;
+        font-size: 12px;
+        text-align: left;
+      }
+      .modes button[aria-pressed="true"] {
+        border-bottom-color: var(--accent);
+        color: var(--accent);
+        background: var(--soft);
+      }
+      .mode-number {
+        display: block;
+        font-size: 10px;
+        opacity: 0.65;
+        margin-bottom: 3px;
+      }
+      .prompt {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: var(--soft);
+        border: 1px solid var(--line);
+        padding: 12px 14px;
+        border-radius: 5px;
+        margin-bottom: 16px;
+      }
+      .prompt > div {
+        min-width: 0;
+        flex: 1;
+      }
+      .label {
+        display: block;
+        color: var(--muted);
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 4px;
+      }
+      .prompt code {
+        display: block;
+        white-space: pre-wrap;
+        font-size: 12px;
+        overflow-wrap: anywhere;
+      }
+      #copy {
+        flex-shrink: 0;
+        font-size: 11px;
+      }
+      #copy-status {
+        min-height: 1.4em;
+        font-size: 11px;
+        color: var(--muted);
+        margin: -8px 0 10px;
+      }
+      .scope {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px 18px;
+        font-size: 11px;
+        color: var(--muted);
+        margin: 0 0 12px;
+      }
+      .scope strong {
+        font-weight: 600;
+        color: var(--ink);
+      }
+      .panels {
+        display: grid;
+        grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+        gap: 20px;
+      }
+      .panels > section {
+        min-width: 0;
+      }
+      .panel-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        min-height: 35px;
+        margin-bottom: 8px;
+      }
+      h2 {
+        margin: 0;
+        font-size: 12px;
+        font-weight: 650;
+      }
+      .views {
+        display: flex;
+        gap: 4px;
+      }
+      .views button {
+        padding: 3px 8px;
+        font-size: 10px;
+      }
+      .views button[aria-pressed="true"] {
+        color: var(--accent);
+        border-color: #bda9c8;
+        background: var(--soft);
+      }
+      pre {
+        margin: 0;
+        padding: 14px;
+        background: #fcfbfd;
+        border: 1px solid var(--line);
+        border-radius: 5px;
+        font:
+          11px/1.8 ui-monospace,
+          SFMono-Regular,
+          Menlo,
+          Consolas,
+          monospace;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        overflow: auto;
+      }
+      #source {
+        min-height: 290px;
+        max-height: 360px;
+      }
+      .note {
+        min-height: 290px;
+        padding: 18px;
+        background: var(--soft);
+        border: 1px solid var(--line);
+        border-radius: 5px;
+      }
+      #finding {
+        color: #855f1d;
+        font-size: 12px;
+        font-weight: 650;
+        margin: 0 0 12px;
+      }
+      #explanation {
+        margin: 0 0 12px;
+        font-size: 12px;
+      }
+      #evidence {
+        font-size: 11px;
+        line-height: 1.9;
+        border-left: 2px solid #b7a0c4;
+        padding: 8px 0 8px 12px;
+        white-space: pre-wrap;
+        margin: 0;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px 16px;
+        margin: 16px 0;
+      }
+      #apply {
+        background: var(--accent);
+        color: #fff;
+        border-color: var(--accent);
+        font-size: 12px;
+      }
+      #reset {
+        font-size: 11px;
+      }
+      #noop-label {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        font-size: 11px;
+        color: var(--muted);
+      }
+      #noop {
+        accent-color: var(--accent);
+      }
+      .diff-section {
+        border-top: 1px solid var(--line);
+        padding-top: 16px;
+        margin-top: 18px;
+      }
+      .diff-section h2 {
+        margin-bottom: 8px;
+      }
+      #diff {
+        min-height: 65px;
+        max-height: 240px;
+      }
+      #diff span {
+        display: block;
+        padding: 0 4px;
+      }
+      .added {
+        background: #eef8f0;
+        color: #235f32;
+      }
+      .removed {
+        background: #fff0ef;
+        color: #963f39;
+      }
+      .footer {
+        color: var(--muted);
+        font-size: 10px;
+        margin: 14px 0 0;
+      }
+      [hidden] {
+        display: none !important;
+      }
+      @media (max-width: 620px) {
+        #app {
+          padding: 18px 15px;
+        }
+        .panels {
+          grid-template-columns: minmax(0, 1fr);
+          gap: 15px;
+        }
+        .modes button {
+          padding: 8px 5px 11px;
+          font-size: 10px;
+        }
+        .note,
+        #source {
+          min-height: 0;
+        }
+        #source {
+          max-height: 300px;
+        }
+        .prompt {
+          padding: 10px;
+          gap: 8px;
+        }
+        .prompt code {
+          font-size: 10px;
+        }
+        #copy {
+          padding: 5px 7px;
+        }
+        h1 {
+          font-size: 25px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main id="app">
+      <div class="top">
+        <div>
+          <p class="eyebrow" id="eyebrow">MATH PAPER EDITOR · TEACHING DEMO</p>
+          <h1 id="title">See exactly what an edit changes.</h1>
+        </div>
+        <button id="language" type="button" aria-label="Switch to Chinese">中文</button>
+      </div>
+      <p class="intro" id="intro">
+        Preset examples using synthetic manuscripts. Runs in your browser; no AI calls, uploads, Python, or real paper changes.
+      </p>
+      <nav class="modes" aria-label="Editing modes" id="modes">
+        <button type="button" data-mode="review" aria-pressed="false">
+          <span class="mode-number">01</span><span data-label="review">Review</span>
+        </button>
+        <button type="button" data-mode="edit" aria-pressed="true"><span class="mode-number">02</span><span data-label="edit">Edit</span></button>
+        <button type="button" data-mode="deep-review" aria-pressed="false">
+          <span class="mode-number">03</span><span data-label="deep-review">Deep review</span>
+        </button>
+        <button type="button" data-mode="rewrite" aria-pressed="false">
+          <span class="mode-number">04</span><span data-label="rewrite">Rewrite</span>
+        </button>
+      </nav>
+      <div class="prompt">
+        <div><span class="label" id="prompt-label">Paste into the Codex conversation</span><code id="prompt"></code></div>
+        <button id="copy" type="button">Copy prompt</button>
+      </div>
+      <p id="copy-status" role="status" aria-live="polite"></p>
+      <p class="scope"><span id="scope"></span><span id="change-count"></span></p>
+      <div class="panels">
+        <section aria-labelledby="source-title">
+          <div class="panel-head">
+            <h2 id="source-title">Synthetic manuscript</h2>
+            <div class="views" aria-label="Source version" id="views">
+              <button id="view-original" type="button" aria-pressed="false">Original</button>
+              <button id="view-current" type="button" aria-pressed="true">Current</button>
+            </div>
+          </div>
+          <pre id="source" aria-label="Manuscript source"></pre>
+        </section>
+        <section aria-labelledby="report-title">
+          <div class="panel-head"><h2 id="report-title">Preset review note</h2></div>
+          <div class="note">
+            <p id="finding"></p>
+            <p id="explanation"></p>
+            <p id="evidence"></p>
+          </div>
+        </section>
+      </div>
+      <div class="actions">
+        <button id="apply" type="button">Show illustrative revision</button>
+        <button id="reset" type="button">Reset example</button>
+        <label id="noop-label"><input type="checkbox" id="noop" /><span id="noop-text">Use already-clear language</span></label>
+      </div>
+      <section class="diff-section" aria-labelledby="diff-title">
+        <h2 id="diff-title">Observed source difference</h2>
+        <pre id="diff" aria-label="Source diff"></pre>
+      </section>
+      <p class="footer" id="footer">This demonstration illustrates the v0.1.0 protocol. A review or a clean diff is not a proof certificate.</p>
+      <noscript
+        >This teaching demonstration requires JavaScript. Read the documentation at https://github.com/jieliu-maths/math-paper-editor.</noscript
+      >
+    </main>
+    <script>
+      (() => {
+        const byId = (id) => document.getElementById(id);
+        const parameters = new URLSearchParams(location.search);
+        const validModes = ["review", "edit", "deep-review", "rewrite"];
+        let lang = parameters.get("lang") === "zh" ? "zh" : "en";
+        let mode = validModes.includes(parameters.get("mode")) ? parameters.get("mode") : "edit";
+        let applied = false;
+        let originalView = false;
+        const boundary = [
+          "\\section{Introduction}",
+          "We studies an integration by parts identity.",
+          "",
+          "\\begin{lemma}\\label{lem:parts}",
+          "For every real $u\\in C^2([0,1])$,",
+          "\\[ \\int_0^1 u u''\\,dx = -\\int_0^1 (u')^2\\,dx. \\]",
+          "\\end{lemma}",
+          "\\begin{proof}",
+          "Integration by parts proves the claim.",
+          "\\end{proof}",
+        ].join("\n");
+        const square = [
+          "\\newcommand{\\RR}{\\mathbb R}",
+          "\\begin{lemma}\\label{lem:square}",
+          "For $a,b\\in\\RR$, $(a+b)^2\\le 2a^2+2b^2$.",
+          "\\end{lemma}",
+          "\\begin{proof}",
+          "Put $A=a^2$, $B=b^2$, $P=2ab$ and $D=A+B$.",
+          "Since $0\\le(a-b)^2=D-P$, we have $P\\le D$.",
+          "Thus $(a+b)^2=D+P\\le 2D=2a^2+2b^2$.",
+          "\\end{proof}",
+        ].join("\n");
+        const squareRevision = [
+          "\\newcommand{\\RR}{\\mathbb R}",
+          "\\begin{lemma}\\label{lem:square}",
+          "For $a,b\\in\\RR$, $(a+b)^2\\le 2a^2+2b^2$.",
+          "\\end{lemma}",
+          "\\begin{proof}",
+          "Nonnegativity of $(a-b)^2$ gives $2ab\\le a^2+b^2$.",
+          "Consequently,",
+          "\\[ (a+b)^2=a^2+2ab+b^2\\le 2a^2+2b^2. \\]",
+          "This proves the stated inequality.",
+          "\\end{proof}",
+        ].join("\n");
+        const words = {
+          en: {
+            eyebrow: "MATH PAPER EDITOR · TEACHING DEMO",
+            title: "See exactly what an edit changes.",
+            intro: "Preset examples using synthetic manuscripts. Runs in your browser; no AI calls, uploads, Python, or real paper changes.",
+            modes: { review: "Review", edit: "Edit", "deep-review": "Deep review", rewrite: "Rewrite" },
+            prompt: "Paste into the Codex conversation",
+            copy: "Copy prompt",
+            copied: "Prompt copied.",
+            copyFallback: "Select the prompt and copy it manually.",
+            source: "Synthetic manuscript",
+            report: "Preset review note",
+            original: "Original",
+            current: "Current",
+            apply: "Show illustrative revision",
+            shown: "Revision shown",
+            reset: "Reset example",
+            noop: "Use already-clear language",
+            diff: "Observed source difference",
+            unchanged: "No source changes.",
+            scope: "Scope: ",
+            change: "Source changes: ",
+            readOnly: "Read only",
+            introOnly: "Introduction only",
+            proofOnly: "Proof paragraph only",
+            none: "0",
+            one: "1 language correction",
+            proofChanged: "Proof paragraph",
+            finding: "Mathematical issue remains",
+            readExplanation:
+              "The stated identity omits its boundary term. This is a mathematical issue; the read-only review leaves the manuscript unchanged.",
+            editExplanation:
+              "The authorized scope is the Introduction. Only “We studies” becomes “We study”. The lemma and its mathematical issue remain as written.",
+            noopExplanation:
+              "The Introduction is already clear. Conservative editing makes no language change, and reports the mathematical issue separately.",
+            deepExplanation:
+              "Reconstruct the integration by parts step and test the claim with an admissible function. The counterexample refutes the statement as written.",
+            evidence:
+              "Here u is a real C² function on [0,1].\n∫ u u″ = [u u′]₀¹ − ∫ (u′)².\nThe stated lemma does not restrict endpoint values. An author-approved mathematical repair is still needed.",
+            deepEvidence:
+              "Here u is a real C² function on [0,1].\nTest u(x)=x, so u′=1 and u″=0.\nLeft side: ∫ x·0 = 0.\nClaimed right side: −∫ 1 = −1.\nThe missing term [u u′]₀¹ equals 1.\nThis admissible function refutes the claim as written.",
+            rewriteFinding: "Original statement retained",
+            rewriteExplanation:
+              "This mode uses a separate, correct example. For real numbers a and b, remove aliases with no independent role and explain the inequality directly. The macro, label and lemma stay unchanged.",
+            rewriteEvidence:
+              "0 ≤ (a − b)² implies 2ab ≤ a² + b².\nThen expand (a + b)² and substitute that bound.\nAn equivalent proof is illustrated; no stronger result is claimed.",
+            footer: "This demonstration illustrates the v0.1.0 protocol. A review or a clean diff is not a proof certificate.",
+          },
+          zh: {
+            eyebrow: "MATH PAPER EDITOR · 教学演示",
+            title: "清楚看到每一次修改。",
+            intro: "使用自建短稿的预设案例。完全在浏览器运行；不调用 AI、不上传内容、不需要 Python，也不改动真实论文。",
+            modes: { review: "只读审查", edit: "保守编辑", "deep-review": "深入检查", rewrite: "结构重写" },
+            prompt: "粘贴到 Codex 对话框",
+            copy: "复制指令",
+            copied: "指令已复制。",
+            copyFallback: "请选中指令并手动复制。",
+            source: "自建论文样例",
+            report: "预设审查意见",
+            original: "原稿",
+            current: "当前稿",
+            apply: "展示示例修订",
+            shown: "已展示修订",
+            reset: "重新开始",
+            noop: "使用语言已清楚的版本",
+            diff: "观察到的源码差异",
+            unchanged: "源文件没有变化。",
+            scope: "允许范围：",
+            change: "源码变化：",
+            readOnly: "只读",
+            introOnly: "仅引言",
+            proofOnly: "仅证明段落",
+            none: "0",
+            one: "1 处语言修正",
+            proofChanged: "证明段落",
+            finding: "数学问题仍未解决",
+            readExplanation: "原命题遗漏了边界项。这是数学问题；只读审查保留原稿并指出缺口。",
+            editExplanation: "只获准编辑引言，因此仅将 “We studies” 改为 “We study”。命题及其数学问题保持原样，另行报告。",
+            noopExplanation: "引言的语言已经清楚，因此不作语言修改；数学疑点仍单独报告。零修改也是有效结果。",
+            deepExplanation: "重建分部积分步骤，并用满足原假设的函数检验。该反例否定了原命题的表述。",
+            evidence:
+              "这里 u 是区间 [0,1] 上的实值二阶连续可微函数。\n∫ u u″ = [u u′]₀¹ − ∫ (u′)²。\n原命题未限制端点取值，修复数学内容仍需作者明确授权。",
+            deepEvidence:
+              "这里 u 是区间 [0,1] 上的实值二阶连续可微函数。\n检验 u(x)=x，此时 u′=1、u″=0。\n左边：∫ x·0 = 0。\n原式右边：−∫ 1 = −1。\n遗漏的边界项 [u u′]₀¹ 恰为 1。\n这个满足原假设的函数否定了原命题。",
+            rewriteFinding: "原命题保持不变",
+            rewriteExplanation: "本模式切换到另一份正确的样例。a、b 为实数，删除无独立作用的别名，直接解释不等式；宏、标签与命题保持不变。",
+            rewriteEvidence: "由 0 ≤ (a − b)² 得 2ab ≤ a² + b²。\n展开 (a + b)²，再代入这一上界。\n这里展示等价证明，不宣称更强结论。",
+            footer: "本演示说明 v0.1.0 的工作方式。审查意见或干净的 diff 都不能充当数学正确性证书。",
+          },
+        };
+        function diffLines(before, after) {
+          if (before === after) return [words[lang].unchanged];
+          const a = before.split("\n");
+          const b = after.split("\n");
+          let first = 0;
+          while (first < a.length && first < b.length && a[first] === b[first]) first++;
+          let tail = 0;
+          while (tail < a.length - first && tail < b.length - first && a[a.length - 1 - tail] === b[b.length - 1 - tail]) tail++;
+          return ["--- original", "+++ current", "@@ source changes @@"]
+            .concat(a.slice(Math.max(0, first - 1), first).map((line) => " " + line))
+            .concat(a.slice(first, a.length - tail).map((line) => "-" + line))
+            .concat(b.slice(first, b.length - tail).map((line) => "+" + line))
+            .concat(a.slice(a.length - tail, a.length - tail + 1).map((line) => " " + line));
+        }
+        function reportHeight() {
+          if (window.parent !== window) {
+            window.parent.postMessage(
+              { type: "math-paper-editor-demo-height", height: Math.ceil(byId("app").getBoundingClientRect().height) },
+              window.location.origin
+            );
+          }
+        }
+        function render() {
+          const w = words[lang];
+          document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
+          for (const key of ["eyebrow", "title", "intro", "explanation", "evidence", "footer"]) {
+            if (key !== "explanation" && key !== "evidence") byId(key).textContent = w[key];
+          }
+          byId("language").textContent = lang === "en" ? "中文" : "English";
+          byId("language").setAttribute("aria-label", lang === "en" ? "Switch to Chinese" : "切换到英文");
+          byId("modes").setAttribute("aria-label", lang === "en" ? "Editing modes" : "编辑模式");
+          document.querySelectorAll("[data-mode]").forEach((button) => {
+            const value = button.dataset.mode;
+            button.setAttribute("aria-pressed", String(value === mode));
+            button.querySelector("[data-label]").textContent = w.modes[value];
+          });
+          byId("prompt-label").textContent = w.prompt;
+          byId("copy").textContent = w.copy;
+          byId("source-title").textContent = w.source;
+          byId("report-title").textContent = w.report;
+          byId("view-original").textContent = w.original;
+          byId("view-current").textContent = w.current;
+          byId("view-original").setAttribute("aria-pressed", String(originalView));
+          byId("view-current").setAttribute("aria-pressed", String(!originalView));
+          byId("reset").textContent = w.reset;
+          byId("noop-text").textContent = w.noop;
+          byId("noop-label").hidden = mode !== "edit";
+          const editable = mode === "edit" || mode === "rewrite";
+          const noop = mode === "edit" && byId("noop").checked;
+          const before = mode === "rewrite" ? square : noop ? boundary.replace("We studies", "We study") : boundary;
+          const candidate = mode === "rewrite" ? squareRevision : before.replace("We studies", "We study");
+          const after = applied && editable ? candidate : before;
+          byId("source").textContent = originalView ? before : after;
+          byId("apply").hidden = !editable;
+          byId("apply").textContent = applied ? w.shown : w.apply;
+          byId("apply").disabled = applied;
+          byId("scope").textContent = w.scope + (mode === "edit" ? w.introOnly : mode === "rewrite" ? w.proofOnly : w.readOnly);
+          byId("change-count").textContent = w.change + (before === after ? w.none : mode === "edit" ? w.one : w.proofChanged);
+          byId("finding").textContent = mode === "rewrite" ? w.rewriteFinding : w.finding;
+          byId("explanation").textContent =
+            mode === "rewrite"
+              ? w.rewriteExplanation
+              : mode === "edit"
+                ? noop
+                  ? w.noopExplanation
+                  : w.editExplanation
+                : mode === "deep-review"
+                  ? w.deepExplanation
+                  : w.readExplanation;
+          byId("evidence").textContent = mode === "rewrite" ? w.rewriteEvidence : mode === "deep-review" ? w.deepEvidence : w.evidence;
+          const target = mode === "edit" ? "introduction" : "main.tex";
+          const instructions =
+            lang === "zh"
+              ? mode === "edit"
+                ? "只修改引言的必要语言问题；数学疑点单列，保留数学内容。"
+                : mode === "rewrite"
+                  ? "仅重写证明段落，保留命题、宏与标签，交付改稿和 diff。"
+                  : "保留源文件，报告具体数学证据与检查范围。"
+              : mode === "edit"
+                ? "Edit only necessary language in the Introduction; report mathematical concerns separately."
+                : mode === "rewrite"
+                  ? "Rewrite only the proof; retain the statement, macros and labels. Deliver the revision and diff."
+                  : "Keep sources unchanged; report mathematical evidence and actual coverage.";
+          byId("prompt").textContent = "$math-paper-editor " + mode + " " + target + "\n" + instructions;
+          byId("diff-title").textContent = w.diff;
+          byId("diff").replaceChildren();
+          diffLines(before, after).forEach((line) => {
+            const span = document.createElement("span");
+            span.textContent = line;
+            span.className =
+              line.startsWith("+") && !line.startsWith("+++") ? "added" : line.startsWith("-") && !line.startsWith("---") ? "removed" : "";
+            byId("diff").appendChild(span);
+          });
+          requestAnimationFrame(reportHeight);
+        }
+        document.querySelectorAll("[data-mode]").forEach((button) =>
+          button.addEventListener("click", () => {
+            mode = button.dataset.mode;
+            applied = false;
+            originalView = false;
+            byId("copy-status").textContent = "";
+            render();
+          })
+        );
+        byId("language").addEventListener("click", () => {
+          lang = lang === "en" ? "zh" : "en";
+          byId("copy-status").textContent = "";
+          render();
+        });
+        byId("apply").addEventListener("click", () => {
+          applied = true;
+          originalView = false;
+          render();
+        });
+        byId("reset").addEventListener("click", () => {
+          applied = false;
+          originalView = false;
+          byId("noop").checked = false;
+          byId("copy-status").textContent = "";
+          render();
+        });
+        byId("noop").addEventListener("change", () => {
+          applied = false;
+          originalView = false;
+          render();
+        });
+        byId("view-original").addEventListener("click", () => {
+          originalView = true;
+          render();
+        });
+        byId("view-current").addEventListener("click", () => {
+          originalView = false;
+          render();
+        });
+        byId("copy").addEventListener("click", async () => {
+          try {
+            await navigator.clipboard.writeText(byId("prompt").textContent);
+            byId("copy-status").textContent = words[lang].copied;
+          } catch {
+            byId("copy-status").textContent = words[lang].copyFallback;
+          }
+          reportHeight();
+        });
+        new ResizeObserver(reportHeight).observe(byId("app"));
+        render();
+      })();
+    </script>
+  </body>
+</html>

@@ -10,6 +10,7 @@ Built with Jekyll and the gem-based al-folio v1 runtime.
 | About and contact details       | `_pages/about.md`                                                      |
 | Research interests              | `_pages/research.md`                                                   |
 | AI4Math project and demo        | `_pages/ai-research-workflow.md`, `assets/demos/ai4math-workflow.html` |
+| Math Paper Editor and demo      | `_pages/math-paper-editor.md`, `assets/demos/math-paper-editor.html`   |
 | Publications page               | `_pages/publications.md`                                               |
 | Publication records             | `_bibliography/papers.bib`                                             |
 | Talks                           | `_pages/talks.md`                                                      |
