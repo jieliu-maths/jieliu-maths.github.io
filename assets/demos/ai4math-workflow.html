@@ -1,0 +1,573 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI4Math workflow — interactive teaching example</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #24232c;
+        --muted: #65616e;
+        --accent: #79518c;
+        --line: #e4dfe7;
+        --paper: #faf8fb;
+        --green: #2c6953;
+        --amber: #916018;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: #fff;
+        font:
+          15px/1.65 system-ui,
+          -apple-system,
+          sans-serif;
+      }
+      button {
+        font: inherit;
+        cursor: pointer;
+      }
+      button:focus-visible {
+        outline: 3px solid #b598c6;
+        outline-offset: 3px;
+      }
+      button:disabled {
+        cursor: default;
+        opacity: 0.4;
+      }
+      .demo {
+        padding: 28px;
+      }
+      .top {
+        display: flex;
+        align-items: start;
+        justify-content: space-between;
+        gap: 16px;
+      }
+      .eyebrow {
+        margin: 0 0 8px;
+        font-size: 10px;
+        letter-spacing: 0.16em;
+        font-weight: 700;
+        color: var(--accent);
+      }
+      h1 {
+        margin: 0;
+        font:
+          500 26px/1.25 Georgia,
+          serif;
+        letter-spacing: -0.02em;
+      }
+      .language {
+        flex-shrink: 0;
+        padding: 5px 10px;
+        border: 1px solid var(--line);
+        border-radius: 5px;
+        background: white;
+        color: var(--muted);
+        font-size: 12px;
+        min-height: 36px;
+      }
+      .notice {
+        margin: 12px 0 25px;
+        color: var(--muted);
+        max-width: 76ch;
+        font-size: 12px;
+      }
+      .steps {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        border-bottom: 1px solid var(--line);
+        margin-bottom: 24px;
+        gap: 4px;
+      }
+      .step {
+        border: 0;
+        border-bottom: 2px solid transparent;
+        text-align: left;
+        color: var(--muted);
+        background: transparent;
+        padding: 10px 4px 12px;
+        font-size: 11px;
+        line-height: 1.4;
+      }
+      .step span {
+        display: block;
+        font-variant-numeric: tabular-nums;
+        color: #aaa0af;
+        margin-bottom: 5px;
+      }
+      .step[aria-current="step"] {
+        color: var(--accent);
+        border-bottom-color: var(--accent);
+        font-weight: 650;
+      }
+      .step[aria-current="step"] span {
+        color: var(--accent);
+      }
+      .workspace {
+        display: grid;
+        grid-template-columns: minmax(0, 1.65fr) minmax(210px, 1fr);
+        gap: 28px;
+        align-items: start;
+      }
+      .role {
+        display: inline-block;
+        color: var(--accent);
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        font-size: 10px;
+        font-weight: 700;
+      }
+      h2 {
+        margin: 8px 0 13px;
+        font:
+          500 24px/1.3 Georgia,
+          serif;
+        letter-spacing: -0.015em;
+      }
+      .body p {
+        margin: 0 0 13px;
+      }
+      .body {
+        min-height: 255px;
+      }
+      .formula {
+        background: var(--paper);
+        border-left: 2px solid var(--accent);
+        padding: 13px 15px;
+        margin: 18px 0;
+        line-height: 1.8;
+        font-family: ui-monospace, SFMono-Regular, monospace;
+        font-size: 13px;
+        overflow-wrap: anywhere;
+      }
+      .math-note {
+        font-size: 12px;
+        color: var(--muted);
+      }
+      aside {
+        padding: 20px;
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 7px;
+      }
+      aside h3 {
+        font-size: 10px;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin: 0 0 13px;
+      }
+      .standing {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 18px;
+        color: var(--amber);
+      }
+      .standing.approved {
+        color: var(--green);
+      }
+      dl {
+        margin: 0;
+        font-size: 12px;
+      }
+      dt {
+        color: var(--muted);
+        margin-top: 14px;
+      }
+      dd {
+        margin: 2px 0 0;
+        line-height: 1.5;
+      }
+      .choice {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 18px 0;
+      }
+      .choice button {
+        border: 1px solid var(--line);
+        border-radius: 5px;
+        background: #fff;
+        padding: 8px 11px;
+        font-size: 12px;
+      }
+      .choice button[aria-pressed="true"] {
+        border-color: var(--accent);
+        background: var(--paper);
+        color: var(--accent);
+      }
+      .controls {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+        margin-top: 24px;
+        padding-top: 18px;
+        border-top: 1px solid var(--line);
+      }
+      .controls button {
+        min-height: 40px;
+        padding: 7px 15px;
+        border: 1px solid var(--line);
+        border-radius: 5px;
+        color: var(--ink);
+        background: white;
+        font-size: 12px;
+      }
+      .controls .primary {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+      .controls .reset {
+        margin-left: auto;
+        color: var(--muted);
+        border-color: transparent;
+      }
+      .footnote {
+        color: var(--muted);
+        font-size: 11px;
+        margin: 16px 0 0;
+      }
+      @media (max-width: 640px) {
+        .demo {
+          padding: 20px 16px;
+        }
+        h1 {
+          font-size: 23px;
+        }
+        .steps {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+        .workspace {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+        .body {
+          min-height: 0;
+        }
+        aside {
+          padding: 17px;
+        }
+        dl {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 12px 16px;
+        }
+        dl div {
+          min-width: 0;
+        }
+        dt {
+          margin-top: 0;
+        }
+        .standing {
+          margin-bottom: 14px;
+        }
+      }
+      @media (prefers-reduced-motion: no-preference) {
+        button {
+          transition:
+            border-color 0.15s,
+            background-color 0.15s;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="demo">
+      <div class="top">
+        <div>
+          <p class="eyebrow" id="eyebrow">AI4MATH · TEACHING DEMO</p>
+          <h1 id="demo-title">From a calculation to a reviewed claim.</h1>
+        </div>
+        <button class="language" id="language" type="button" aria-label="Switch to Chinese">中文</button>
+      </div>
+      <p class="notice" id="notice">A scripted example, not a live AI run. Nothing here changes a real research record.</p>
+      <nav class="steps" aria-label="Workflow stages" id="steps"></nav>
+      <div class="workspace">
+        <section aria-live="polite" aria-atomic="true">
+          <span class="role" id="role"></span>
+          <h2 id="stage-title"></h2>
+          <div class="body" id="stage-body"></div>
+        </section>
+        <aside aria-label="Illustrative claim ledger">
+          <h3 id="ledger-title">CLAIM LEDGER</h3>
+          <div class="standing" id="standing" aria-live="polite"></div>
+          <dl>
+            <div>
+              <dt id="evidence-label">Evidence</dt>
+              <dd id="evidence"></dd>
+            </div>
+            <div>
+              <dt id="scope-label">Scope</dt>
+              <dd id="scope"></dd>
+            </div>
+            <div>
+              <dt id="review-label">Review</dt>
+              <dd id="review"></dd>
+            </div>
+            <div>
+              <dt id="decision-label">Owner decision</dt>
+              <dd id="decision"></dd>
+            </div>
+          </dl>
+        </aside>
+      </div>
+      <div class="controls">
+        <button id="previous" type="button">Previous</button>
+        <button class="primary" id="next" type="button">Next step →</button>
+        <button class="reset" id="reset" type="button">Reset demo</button>
+      </div>
+      <p class="footnote" id="footnote">Protocol checks preserve evidence. They do not establish mathematical truth.</p>
+      <noscript
+        >This demonstration needs JavaScript. The project documentation explains the same sequence: question, construction, independent critique,
+        repair, owner decision, and record.</noscript
+      >
+    </main>
+    <script>
+      (() => {
+        let step = 0;
+        let language = "en";
+        let accepted = false;
+        const $ = (id) => document.getElementById(id);
+        let passed = 0;
+        for (let n = 0n; n < 100n; n++) {
+          let sum = 0n;
+          for (let k = 0n; k < n; k++) sum += 2n * k + 1n;
+          if (sum === n * n) passed++;
+        }
+        const copy = {
+          en: {
+            eyebrow: "AI4MATH · TEACHING DEMO",
+            title: "From a calculation to a reviewed claim.",
+            notice: "A scripted example, not a live AI run. Nothing here changes a real research record.",
+            names: ["Question", "Construct", "Critique", "Repair", "Decide", "Record"],
+            ledger: "CLAIM LEDGER",
+            fields: ["Evidence", "Scope", "Review", "Owner decision"],
+            previous: "Previous",
+            next: "Next step →",
+            reset: "Reset demo",
+            pending: "Awaiting owner",
+            approved: "Approved in this demo",
+            open: "Open claim",
+            approve: "Illustrate owner approval",
+            defer: "Keep pending",
+            approval: "Illustrative approval only",
+            noApproval: "Not given",
+            footnote: "Protocol checks preserve evidence. They do not establish mathematical truth.",
+            stages: [
+              [
+                "Director · question",
+                "Freeze one precise question.",
+                '<p>Does the sum of the first <strong>n odd positive integers</strong> equal n² for every nonnegative integer n?</p><div class="formula">1 + 3 + ··· + (2n − 1) = n²</div><p class="math-note">Here n counts the terms; the empty sum at n = 0 is zero. All notation is local to this teaching example.</p>',
+                "No evidence yet",
+                "Every nonnegative integer",
+                "Not started",
+              ],
+              [
+                "Researcher · construction",
+                "A computation is useful evidence.",
+                '<p>The browser checks the same bounded identity using exact integer arithmetic.</p><div class="formula">n = 0, 1, …, 99<br><strong>' +
+                  passed +
+                  " / 100 cases passed</strong></div><p>The claim is still open over all nonnegative integers. The evidence covers only the tested range.</p>",
+                "100 exact finite checks",
+                "Only n = 0,…,99 checked",
+                "Independent review needed",
+              ],
+              [
+                "Critic · independent review",
+                "Find the gap before accepting it.",
+                '<p><strong>Passing 100 cases does not prove the universal claim.</strong> No argument yet covers all larger integers.</p><p>The Critic first develops an independent baseline, then compares it with the construction. Shared derivation roots must be disclosed.</p><div class="formula">Survives the finite test ≠ proved for every n</div>',
+                "Finite evidence retained",
+                "No counterexample in tested range",
+                "Universal proof missing",
+              ],
+              [
+                "Researcher + Critic · repair",
+                "Repair the exact missing step.",
+                '<p>Use induction: the empty sum equals 0². If the sum of the first n terms is n², add the next odd number.</p><div class="formula">n² + (2n + 1) = (n + 1)²</div><p class="math-note">The scripted review checks the base case, the induction step, and the quantifier. This illustration is not a formal certificate or a completed real research audit.</p>',
+                "Induction argument + finite checks",
+                "Argument covers every nonnegative integer",
+                "Scripted review shown",
+              ],
+              [
+                "Owner · decision",
+                "Review does not replace the owner.",
+                '<p>The Director explains the precise result, why the proof closes, and what was reviewed. Acceptance is a separate decision.</p><p>Try an illustrative outcome below. Neither choice writes files, approves a real theorem, or launches another run.</p><div class="choice"><button id="defer" type="button">Keep pending</button><button id="approve" type="button">Illustrate owner approval</button></div>',
+                "Argument and review preserved",
+                "Precisely stated universal identity",
+                "Scripted review shown",
+              ],
+              [
+                "Director · record",
+                "Carry the result and its scope forward.",
+                '<p id="record-result"></p><p>The question, original computation, gap, repair, and decision remain visible. In a real project, only explicit owner approval permits synchronizing the accepted record.</p><p class="math-note">Next mathematical question: what does the result actually unlock? A new technical route requires its own owner decision.</p>',
+                "Original evidence and repair retained",
+                "No scope beyond the stated identity",
+                "Review history retained",
+              ],
+            ],
+            recordPending: "No owner approval has been illustrated. The claim remains pending; evidence alone does not promote it.",
+            recordApproved: "This teaching example now shows an approved outcome. The real project's state remains unchanged.",
+          },
+          zh: {
+            eyebrow: "AI4MATH · 教学演示",
+            title: "从一次计算，到经审查的命题。",
+            notice: "这是预设教学案例，不是真实 AI 运行；不会修改任何正式研究记录。",
+            names: ["提出问题", "研究构造", "独立审查", "修补缺口", "人工决策", "保留记录"],
+            ledger: "命题账本",
+            fields: ["证据", "适用范围", "审查", "负责人决策"],
+            previous: "上一步",
+            next: "下一步 →",
+            reset: "重新开始",
+            pending: "等待负责人决定",
+            approved: "演示中已批准",
+            open: "命题仍未解决",
+            approve: "演示负责人批准",
+            defer: "继续保留待审",
+            approval: "仅为演示批准",
+            noApproval: "尚未批准",
+            footnote: "工作流检查保存证据及其范围，不能代替数学真实性判断。",
+            stages: [
+              [
+                "Director · 冻结问题",
+                "先明确一个准确的问题。",
+                '<p>前 <strong>n 个正奇数</strong>之和是否对每个非负整数 n 都等于 n²？</p><div class="formula">1 + 3 + ··· + (2n − 1) = n²</div><p class="math-note">这里 n 表示项数；n = 0 时空和为零。记号只在这个教学案例中使用。</p>',
+                "尚无证据",
+                "所有非负整数",
+                "尚未开始",
+              ],
+              [
+                "Researcher · 构造",
+                "一次计算提供有限范围的证据。",
+                '<p>浏览器使用精确整数运算，检查这个等式的有限个案例。</p><div class="formula">n = 0, 1, …, 99<br><strong>' +
+                  passed +
+                  " / 100 个案例通过</strong></div><p>证据只覆盖检验过的范围；面向所有非负整数的命题仍未解决。</p>",
+                "100 个精确有限检验",
+                "仅检验 n = 0,…,99",
+                "仍需独立审查",
+              ],
+              [
+                "Critic · 独立审查",
+                "接受结论前，先找出缺口。",
+                '<p><strong>100 个案例成立，并不证明无限范围的命题。</strong>目前还没有论证覆盖所有更大的整数。</p><p>Critic 先独立形成判断，再与构造比较；若两者依赖同一决定性来源，必须披露。</p><div class="formula">有限检验通过 ≠ 对每个 n 成立</div>',
+                "保留原始有限证据",
+                "检验范围内未发现反例",
+                "缺少普遍证明",
+              ],
+              [
+                "Researcher + Critic · 修补",
+                "修补准确缺失的论证。",
+                '<p>使用归纳法：空和等于 0²。若前 n 项之和等于 n²，再加入下一个正奇数。</p><div class="formula">n² + (2n + 1) = (n + 1)²</div><p class="math-note">预设审查核对归纳起点、归纳步骤和量词。本例不是形式化证书，也不代表真实研究中的独立审查已完成。</p>',
+                "归纳论证与有限检验",
+                "论证覆盖所有非负整数",
+                "展示预设审查过程",
+              ],
+              [
+                "负责人 · 决策",
+                "独立审查仍不能代替负责人。",
+                '<p>Director 说明精确结果、证明为何闭合及审查范围。是否正式接受，是另一个决定。</p><p>下方仅演示两种结果，均不会写文件、批准真实定理或开启下一轮研究。</p><div class="choice"><button id="defer" type="button">继续保留待审</button><button id="approve" type="button">演示负责人批准</button></div>',
+                "保留论证与审查",
+                "准确陈述的普遍恒等式",
+                "展示预设审查过程",
+              ],
+              [
+                "Director · 保留记录",
+                "把结果与适用范围一起留下。",
+                '<p id="record-result"></p><p>问题、原始计算、缺口、修补与决策都应保留。真实项目只有获得负责人明确批准，才可同步正式数学记录。</p><p class="math-note">下一个数学问题：这个结果究竟解锁了什么？新的技术路线需要新的负责人决策。</p>',
+                "保留原始证据与修补",
+                "不超出原命题的范围",
+                "保留审查历史",
+              ],
+            ],
+            recordPending: "尚未演示负责人批准，命题保持待审；证据本身不会自动升级正式状态。",
+            recordApproved: "本教学案例展示了一个已批准的结果，真实项目状态依然没有改变。",
+          },
+        };
+        function resize() {
+          requestAnimationFrame(() => parent.postMessage({ type: "ai4math-demo-height", height: document.body.scrollHeight }, location.origin));
+        }
+        function render() {
+          const t = copy[language];
+          const s = t.stages[step];
+          document.documentElement.lang = language === "zh" ? "zh-CN" : "en";
+          $("eyebrow").textContent = t.eyebrow;
+          $("demo-title").textContent = t.title;
+          $("notice").textContent = t.notice;
+          $("language").textContent = language === "en" ? "中文" : "English";
+          $("language").setAttribute("aria-label", language === "en" ? "Switch to Chinese" : "切换到英文");
+          $("steps").replaceChildren(
+            ...t.names.map((name, i) => {
+              const button = document.createElement("button");
+              button.type = "button";
+              button.className = "step";
+              button.innerHTML = "<span>0" + (i + 1) + "</span>" + name;
+              if (i === step) button.setAttribute("aria-current", "step");
+              button.addEventListener("click", () => {
+                step = i;
+                render();
+              });
+              return button;
+            })
+          );
+          $("role").textContent = s[0];
+          $("stage-title").textContent = s[1];
+          $("stage-body").innerHTML = s[2];
+          $("ledger-title").textContent = t.ledger;
+          ["evidence", "scope", "review", "decision"].forEach((field, i) => ($(field + "-label").textContent = t.fields[i]));
+          $("evidence").textContent = s[3];
+          $("scope").textContent = s[4];
+          $("review").textContent = s[5];
+          $("standing").textContent = step >= 4 ? (accepted ? t.approved : t.pending) : t.open;
+          $("standing").classList.toggle("approved", step >= 4 && accepted);
+          $("decision").textContent = accepted && step >= 4 ? t.approval : t.noApproval;
+          if (step === 4) {
+            $("approve").setAttribute("aria-pressed", String(accepted));
+            $("defer").setAttribute("aria-pressed", String(!accepted));
+            $("approve").addEventListener("click", () => {
+              accepted = true;
+              render();
+            });
+            $("defer").addEventListener("click", () => {
+              accepted = false;
+              render();
+            });
+          }
+          if (step === 5) $("record-result").textContent = accepted ? t.recordApproved : t.recordPending;
+          $("previous").textContent = t.previous;
+          $("previous").disabled = step === 0;
+          $("next").textContent = t.next;
+          $("next").disabled = step === 5;
+          $("reset").textContent = t.reset;
+          $("footnote").textContent = t.footnote;
+          resize();
+        }
+        $("previous").addEventListener("click", () => {
+          if (step > 0) step--;
+          render();
+        });
+        $("next").addEventListener("click", () => {
+          if (step < 5) step++;
+          render();
+        });
+        $("reset").addEventListener("click", () => {
+          step = 0;
+          accepted = false;
+          render();
+        });
+        $("language").addEventListener("click", () => {
+          language = language === "en" ? "zh" : "en";
+          render();
+        });
+        window.addEventListener("resize", resize);
+        render();
+      })();
+    </script>
+  </body>
+</html>
