@@ -2,7 +2,7 @@
 layout: page
 title: AI4Math
 permalink: /ai-research-workflow/
-description: Personal experiments with AI tools and notes from my own mathematical workflow.
+description: AI tools for mathematical work, from inspectable workflows to faithful manuscript revision.
 nav: true
 nav_order: 5
 _styles: |
@@ -43,42 +43,42 @@ _styles: |
 
 <div class="workflow-showcase">
   <section class="wf-hero" aria-labelledby="workflow-heading">
-    <p class="wf-eyebrow">Personal interest · Practical experiments</p>
-    <h2 id="workflow-heading">Tools and notes<br>from my own workflow.</h2>
-    <p class="wf-lead">I enjoy trying AI tools in my everyday mathematical work. This page collects personal experiments and summaries of my own workflow: keeping arguments organized, reviewing drafts, and tracking revisions.</p>
+    <p class="wf-eyebrow">AI tools · Workflows and manuscript revision</p>
+    <h2 id="workflow-heading">AI tools for<br>mathematical work.</h2>
+    <p class="wf-lead">I develop tools for organizing mathematical work and revising manuscripts with AI. Drawing on my own workflow, I focus on explicit assumptions, traceable evidence, scoped edits, and author control.</p>
     <div class="wf-links">
-      <a class="wf-primary" href="#workflow-demo">Organizing mathematical work ↓</a>
+      <a class="wf-primary" href="#workflow-demo">Mathematical workflows ↓</a>
       <a href="#manuscript-editor">Manuscript review &amp; revision ↓</a>
     </div>
-    <p class="wf-meta">Personal notes · Workflow practice</p>
+    <p class="wf-meta">Mathematical workflows · Manuscript review · LaTeX</p>
   </section>
 
-  <section class="wf-section" aria-label="Working habits behind these tools">
+  <section class="wf-section" aria-label="Principles behind these tools">
     <div class="wf-principles">
       <div>
-        <h3><span class="wf-number">01</span>Keep working notes usable.</h3>
-        <p>Keep the question, assumptions, dependencies, and unfinished steps together so I can pick up the thread later.</p>
+        <h3><span class="wf-number">01</span>Keep the question precise.</h3>
+        <p>Make the exact target, assumptions, proof dependencies, and unresolved gaps explicit across working sessions.</p>
       </div>
       <div>
-        <h3><span class="wf-number">02</span>Keep checks in context.</h3>
-        <p>Label calculations, numerical observations, external inputs, and proofs clearly in my notes, including what remains unverified.</p>
+        <h3><span class="wf-number">02</span>Keep evidence in scope.</h3>
+        <p>Distinguish proofs, finite checks, numerical observations, and external inputs so each supports only the conclusion it warrants.</p>
       </div>
       <div>
-        <h3><span class="wf-number">03</span>Keep revisions visible.</h3>
-        <p>Retain the original text and the diff, distinguish language edits from mathematical changes, and review suggestions before accepting them.</p>
+        <h3><span class="wf-number">03</span>Keep the author in control.</h3>
+        <p>Use scoped review and traceable revisions to improve clarity while preserving mathematical meaning and leaving decisions with the author.</p>
       </div>
     </div>
   </section>
 
   <section class="wf-section" id="workflow-demo" aria-labelledby="demo-heading">
-    <p class="wf-eyebrow">Workflow note 01 · Organization</p>
-    <h2 id="demo-heading">Keeping a working argument organized</h2>
-    <p class="wf-intro">AI Research Workflow collects conventions and small tools for organizing my mathematical work: recording the target, dependencies, evidence, reviews, and decisions. The example below illustrates these habits using a familiar identity.</p>
+    <p class="wf-eyebrow">Workflow 01 · Evidence and review</p>
+    <h2 id="demo-heading">Inspectable mathematical workflows</h2>
+    <p class="wf-intro">AI Research Workflow records theorem targets, dependencies, evidence, independent review, and author-approved decisions. The teaching example follows a familiar identity through construction, critique, repair, and a decision.</p>
     <p class="wf-scope"><a href="https://github.com/jieliu-maths/AI-Research-Workflow">Workflow source &amp; notes ↗</a> · <a href="https://github.com/jieliu-maths/AI-Research-Workflow/blob/main/README.zh-CN.md" lang="zh-CN">中文说明 ↗</a></p>
     <details class="wf-experiment" id="workflow-example">
-      <summary>Open the workflow demonstration</summary>
+      <summary>Explore the workflow demonstration</summary>
       <iframe class="wf-demo" id="ai4math-demo" src="{{ '/assets/demos/ai4math-workflow.html' | relative_url }}" title="Interactive AI4Math workflow teaching example, with English and Chinese controls" width="930" height="720" loading="lazy"></iframe>
-      <p class="wf-caption">A scripted illustration with local exact computation. It makes no model calls or uploads and changes no working files. <a href="{{ '/assets/demos/ai4math-workflow.html' | relative_url }}">Open the demonstration ↗</a></p>
+      <p class="wf-caption">A scripted illustration with local exact computation. It makes no model calls or uploads and changes no research record. <a href="{{ '/assets/demos/ai4math-workflow.html' | relative_url }}">Open the demonstration ↗</a></p>
     </details>
     <details class="wf-experiment">
       <summary>Try the offline workflow example</summary>
@@ -92,9 +92,9 @@ python3 examples/ai4math/verify.py \
   </section>
 
   <section class="wf-section" id="manuscript-editor" aria-labelledby="manuscript-heading">
-    <p class="wf-eyebrow">Workflow note 02 · Editing</p>
-    <h2 id="manuscript-heading">Reviewing and revising drafts</h2>
-    <p class="wf-intro">Math Paper Editor packages instructions and helpers from my manuscript-editing workflow. It supports scoped review and conservative LaTeX revision, separates mathematical concerns from language edits, and keeps source changes visible.</p>
+    <p class="wf-eyebrow">Workflow 02 · Mathematical writing</p>
+    <h2 id="manuscript-heading">Reviewing and revising mathematical manuscripts</h2>
+    <p class="wf-intro">Math Paper Editor supports scoped mathematical review and faithful LaTeX revision. It separates mathematical concerns from language edits and makes the actual source changes inspectable.</p>
     <p class="wf-scope">The current version supports read-only review, conservative editing, deeper proof inspection, and authorized restructuring of existing arguments. Its demonstration shows what “edit only the Introduction” allows, including a valid zero-change outcome.</p>
     <p class="wf-scope"><a href="https://github.com/jieliu-maths/math-paper-editor">Editor source &amp; notes ↗</a> · <a href="https://github.com/jieliu-maths/math-paper-editor/blob/main/README.zh-CN.md" lang="zh-CN">中文说明 ↗</a></p>
     <details class="wf-experiment" id="editor-demo">
@@ -105,13 +105,13 @@ python3 examples/ai4math/verify.py \
   </section>
 
   <section class="wf-section wf-last" aria-labelledby="scope-heading">
-    <h2 id="scope-heading">Notes on these examples</h2>
-    <p class="wf-scope">These notes describe how I currently organize my work. The tools remain personal experiments that I expect to revise as I use them. Their checks concern recordkeeping and editing behavior; mathematical judgments still need the author's review. Example outputs and test records are linked below.</p>
-    <p class="wf-scope"><a href="https://github.com/jieliu-maths/AI-Research-Workflow/blob/main/docs/landscape-review.en.md">Background reading and related tools ↗</a> · <a href="https://github.com/jieliu-maths/math-paper-editor/blob/v0.1.0/evals/results/v0.1.0.md">Editor examples and test records ↗</a></p>
+    <h2 id="scope-heading">Scope and evaluation</h2>
+    <p class="wf-scope">Consistency checks and model-assisted reviews support the workflow; mathematical judgments remain the author's responsibility. Public evaluation notes document the tested cases and current limitations.</p>
+    <p class="wf-scope"><a href="https://github.com/jieliu-maths/AI-Research-Workflow/blob/main/docs/landscape-review.en.md">Related tools and workflow design ↗</a> · <a href="https://github.com/jieliu-maths/math-paper-editor/blob/v0.1.0/evals/results/v0.1.0.md">Manuscript-editor evaluation ↗</a></p>
     <details class="wf-experiment">
-      <summary>Practical setup and related experiments</summary>
+      <summary>Implementation notes and AI4S</summary>
       <p class="wf-scope">The instructions and read-only review do not themselves need local Python. Bundled snapshots, guarded edits, validation, installation, and upgrades use Python 3.10+. The browser demonstrations use JavaScript; compiling a manuscript requires an available TeX compiler or host service.</p>
-      <p class="wf-scope">An optional <a href="https://github.com/jieliu-maths/AI-Research-Workflow/tree/main/profiles/ai4s">AI4S template</a> collects similar organizational habits for data, experiments, and reproducibility. This page focuses on my own mathematical workflow.</p>
+      <p class="wf-scope">An <a href="https://github.com/jieliu-maths/AI-Research-Workflow/tree/main/profiles/ai4s">experimental AI4S profile</a> extends the workflow conventions to data provenance, controls, frozen evaluation, and reproducibility. The main emphasis here remains mathematical work.</p>
     </details>
   </section>
 </div>

@@ -2,11 +2,11 @@
 layout: page
 title: AI4Math
 permalink: /math-paper-editor/
-description: Manuscript-editing notes within my personal AI4Math experiments.
+description: Mathematical manuscript review and revision within my AI4Math tools.
 nav: false
 ---
 
-<p>My manuscript-editing notes and tools are collected with my other personal AI4Math experiments.</p>
+<p>Manuscript review and revision is part of my AI4Math workflow tools.</p>
 <p><a id="ai4math-editor-link" href="{{ '/ai-research-workflow/' | relative_url }}#manuscript-editor">Continue to this part of the AI4Math page →</a></p>
 
 <script>

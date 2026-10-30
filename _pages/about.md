@@ -37,8 +37,8 @@ Read about my [research interests]({{ '/research/' | relative_url }}), browse my
 [talks]({{ '/talks/' | relative_url }}) and [teaching experience]({{ '/teaching/' | relative_url }}).
 
 <section class="workflow-entry" aria-labelledby="workflow-entry-heading">
-  <p class="workflow-label">Personal interests</p>
+  <p class="workflow-label">Tools &amp; workflows</p>
   <h2 id="workflow-entry-heading">AI4Math</h2>
-  <p class="workflow-description">I enjoy experimenting with AI tools and sharing notes from my own mathematical workflow, from organizing arguments to revising drafts.</p>
-  <p class="workflow-links"><a href="{{ '/ai-research-workflow/' | relative_url }}">Notes, tools &amp; demonstrations →</a></p>
+  <p class="workflow-description">I develop and refine AI tools for mathematical work, with an emphasis on inspectable workflows and faithful manuscript revision.</p>
+  <p class="workflow-links"><a href="{{ '/ai-research-workflow/' | relative_url }}">Explore AI4Math →</a></p>
 </section>
