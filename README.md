@@ -5,17 +5,17 @@ Built with Jekyll and the gem-based al-folio v1 runtime.
 
 ## Pages and content
 
-| Content                         | Source                                                                 |
-| ------------------------------- | ---------------------------------------------------------------------- |
-| About and contact details       | `_pages/about.md`                                                      |
-| Research interests              | `_pages/research.md`                                                   |
-| AI4Math project and demo        | `_pages/ai-research-workflow.md`, `assets/demos/ai4math-workflow.html` |
-| Math Paper Editor and demo      | `_pages/math-paper-editor.md`, `assets/demos/math-paper-editor.html`   |
-| Publications page               | `_pages/publications.md`                                               |
-| Publication records             | `_bibliography/papers.bib`                                             |
-| Talks                           | `_pages/talks.md`                                                      |
-| Teaching                        | `_pages/teaching.md`                                                   |
-| Site metadata and feature flags | `_config.yml`                                                          |
+| Content                         | Source                                                        |
+| ------------------------------- | ------------------------------------------------------------- |
+| About and contact details       | `_pages/about.md`                                             |
+| Research interests              | `_pages/research.md`                                          |
+| AI4Math explorations and demos  | `_pages/ai-research-workflow.md`, `assets/demos/`             |
+| Legacy manuscript-editor link   | `_pages/math-paper-editor.md` redirects into the AI4Math page |
+| Publications page               | `_pages/publications.md`                                      |
+| Publication records             | `_bibliography/papers.bib`                                    |
+| Talks                           | `_pages/talks.md`                                             |
+| Teaching                        | `_pages/teaching.md`                                          |
+| Site metadata and feature flags | `_config.yml`                                                 |
 
 The website contains published articles and public preprints. The source CV and work in progress are not website assets.
 Do not add the CV PDF to this repository or link to it from public pages. CV filenames are ignored by Git and excluded from the Jekyll build.
