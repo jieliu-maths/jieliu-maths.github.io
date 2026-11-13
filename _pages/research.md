@@ -86,9 +86,11 @@ _styles: |
   </section>
 
   <section class="research-theme" aria-labelledby="self-similar-blow-up-in-nonlinear-waves">
-    <h2 id="self-similar-blow-up-in-nonlinear-waves">Self-similar blow-up in nonlinear waves</h2>
+    <h2 id="self-similar-blow-up-in-nonlinear-waves">Self-similar blow-up in dispersive waves</h2>
     <p>
       Nonlinear focusing can lead to finite-time blow-up, with self-similar or generalized self-similar profiles describing the emerging scales.
+      In joint work on the two-dimensional Zakharov system, we prove asymptotic stability of a family of self-similar blow-up solutions under nonradial perturbations in the energy space
+      <a class="research-cite" href="{{ '/publications/#ghoul2026zakharov' | relative_url }}" title="Ghoul, Liu and Masmoudi: Asymptotic stability of self-similar blow-up for the two-dimensional Zakharov system">[GLM26]</a>.
       My work examines generalized self-similar blow-up in wave equations with derivative nonlinearities
       <a class="research-cite" href="{{ '/publications/#ghoul2025spatial' | relative_url }}" title="Ghoul, Liu and Masmoudi: Blow-up of the one-dimensional wave equation with quadratic spatial derivative nonlinearity">[GLM25]</a>
       <a class="research-cite" href="{{ '/publications/#liu2025time' | relative_url }}" title="Liu and Raees: Stable self-similar blow-up in nonlinear wave equations with quadratic time-derivative nonlinearities">[LR25]</a>,
